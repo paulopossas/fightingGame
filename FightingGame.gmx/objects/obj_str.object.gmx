@@ -27,9 +27,41 @@
             <kind>1</kind>
             <string>jumping = false
 atk = false
-image_speed = 0.3
-health = 100
+image_speed = 0.5
+health = 1000
 facing = 0 // 0 for left, 1 for right
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if health is greater than 0
+if(health &lt;= 0) // If health is all gone
+{
+    health = 0; // Not neccessary, but sets health points to 0
+    image_index = 0; // Resets image index to 0
+    sprite_index = Str_dmg; // Set enemy animation to Death
+    image_speed = .8; // Set enemy animation speed
+    fade = 1;
+    //eSTATE = 5; // Set enemy state to Death
+}
 </string>
           </argument>
         </arguments>
@@ -66,20 +98,6 @@ facing = 0 // 0 for left, 1 for right
       </action>
       <action>
         <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>107</id>
         <kind>0</kind>
         <userelative>-1</userelative>
@@ -104,36 +122,8 @@ facing = 0 // 0 for left, 1 for right
       </action>
       <action>
         <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>421</id>
         <kind>3</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>0</useapplyto>
@@ -170,17 +160,116 @@ facing = 0 // 0 for left, 1 for right
       </action>
       <action>
         <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// This code checks wether or not the player is within attacking range
+if(obj_str.x &lt; x + abs(sprite_width/2) &amp;&amp; obj_str.x &gt; x - abs(sprite_width/2) &amp;&amp; obj_str.y &lt; y + abs(sprite_height/2) &amp;&amp; obj_str.y &gt; y - abs(sprite_height/2)) withinAttackDist = 1;
+else // If not
+withinAttackDist = 0; // Enemy cannot attack
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_spd">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision with the Player
+if(withinAttackDist) // Players punch
+{
+    
+        if(instance_exists(obj_spd_jab_hit)) // Player punching
+        {
+            health -= 5; // Take away hit points
+            alarm[0] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = Str_dmg; // Set players animation to hurt
+            image_speed = .5; // Set players animation speed
+            
+        }
+        else
+        if(instance_exists(obj_spd_lowkick)) // Player Combo Punching
+        {
+            health -= 6; // Take away hit points
+            alarm[0] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = Str_dmg; // Set players animation to hurt
+            image_speed = .5; // Set players animation speed
+            
+        }
+        else
+        if(instance_exists(obj_spd_uppercut)) // Player Kicking
+        {
+            health -= 5; // Take away hit points
+            alarm[0] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = Str_dmg; // Set players animation to hurt
+            image_speed = .5; // Set players animation speed
+            
+        }
+        /*else
+        if(obj_str.STATE == 13) // Jump Kick
+        {
+            health -= 15; // Take away hit points
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(obj_str.STATE == 14) // Jump Kicking Right
+        {
+            health -= 20; // Take away hit points
+            x += 50;
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(obj_str.STATE == 15) // Jump Kicking Left
+        {
+            health -= 20; // Take away hit points
+            x -= 50;
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }*/
+    
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="4" ename="obj_ground">
@@ -877,114 +966,6 @@ facing = 0 // 0 for left, 1 for right
       </action>
       <action>
         <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>403</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_object</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>-1</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>10</kind>
-            <object>obj_spd</object>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>4</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>109</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_move_to</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>-1</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>-15</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>421</id>
-        <kind>3</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>401</id>
         <kind>0</kind>
         <userelative>-1</userelative>
@@ -1034,20 +1015,6 @@ facing = 0 // 0 for left, 1 for right
             <string>0</string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>
@@ -1341,7 +1308,7 @@ if room_get_name(room) = "rm_speed"
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>-13</string>
+            <string>-15</string>
           </argument>
         </arguments>
       </action>

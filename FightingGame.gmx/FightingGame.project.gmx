@@ -48,6 +48,9 @@
       </objects>
       <objects name="SPD">
         <object>objects\obj_spd</object>
+        <object>objects\obj_spd_jab_hit</object>
+        <object>objects\obj_spd_lowkick</object>
+        <object>objects\obj_spd_uppercut</object>
       </objects>
     </objects>
   </objects>

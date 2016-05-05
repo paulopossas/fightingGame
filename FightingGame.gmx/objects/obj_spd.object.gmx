@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>jumping = false;
-image_speed = 0.3;
+image_speed = 0.1;
 health = 100;
 facing = 0 ;// 0 for left, 1 for right
 
@@ -87,6 +87,7 @@ if(health &lt;= 0) // If health is all gone
     image_index = 0; // Resets image index to 0
     sprite_index = spd_dmg; // Set enemy animation to Death
     image_speed = .8; // Set enemy animation speed
+    fade = 1;
     eSTATE = 5; // Set enemy state to Death
 }
 </string>
@@ -119,11 +120,20 @@ if(eSTATE == 0 || eSTATE == 1 || eSTATE == 2) // If enemy is not attacking alrea
        image_index = 0; // Reset animation index to 0
        eAttack = round(random(2));
        if(eAttack == 0)
+       {
        sprite_index = spd_jab; // Set enemy animation to Attack
+       instance_create(x,y, obj_spd_jab_hit)
+       }
        else if(eAttack == 1)
+       {
        sprite_index = spd_lowkick;
+       instance_create(x,y, obj_spd_lowkick)
+       }
        else if(eAttack == 2)
+       {
        sprite_index = spd_uppercut;
+       instance_create(x,y, obj_spd_uppercut)
+       }
        image_speed = .8; // Set enemy animation speed
        eSTATE = 3; // Set enemy state to Attack
     }
@@ -319,7 +329,7 @@ if(eSTATE == 3) // Attack
     if(image_index &gt;= image_number - 1) // If animation is finished
     {
         sprite_index = spd_idle; // Set enemy animation to Stand
-        image_speed = 1; // Set enemy animation speed
+        image_speed = .3; // Set enemy animation speed
         eSTATE = 0; // Set enemy state to Stand
     }
 }
@@ -348,7 +358,6 @@ if(fade == 1) // If enemy is dead
     if(image_alpha &lt;= 0) // If enemy alpha is fully decreased
     {
         instance_destroy(); // Destroy enemy
-        with(shadow) instance_destroy(); // Destroy enemy shadow
     }
 }
 </string>
@@ -384,7 +393,7 @@ if(withinAttackDist) // Players punch
             alarm[2] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
+            image_speed = .1; // Set players animation speed
             eSTATE = 4; // Set players state to Hurt
         }
         else
@@ -394,7 +403,7 @@ if(withinAttackDist) // Players punch
             alarm[2] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
+            image_speed = .1; // Set players animation speed
             eSTATE = 4; // Set players state to Hurt
         }
         else
@@ -404,7 +413,7 @@ if(withinAttackDist) // Players punch
             alarm[2] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
+            image_speed = .1; // Set players animation speed
             eSTATE = 4; // Set players state to Hurt
         }
         else
