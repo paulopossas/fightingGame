@@ -29,14 +29,20 @@
       <sprite>sprites\spd_jab</sprite>
       <sprite>sprites\spd_jab_hit</sprite>
       <sprite>sprites\spd_lowkick</sprite>
+      <sprite>sprites\spd_lowkick_hit</sprite>
       <sprite>sprites\spd_uppercut</sprite>
+      <sprite>sprites\spd_uppercut_hit</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background1</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_healthbar.gml</script>
+  </scripts>
   <objects name="objects">
+    <object>objects\obj_hud</object>
     <object>objects\obj_ground</object>
     <objects name="Characters">
       <objects name="player">
@@ -49,8 +55,8 @@
       <objects name="SPD">
         <object>objects\obj_spd</object>
         <object>objects\obj_spd_jab_hit</object>
-        <object>objects\obj_spd_lowkick</object>
-        <object>objects\obj_spd_uppercut</object>
+        <object>objects\obj_spd_lowkick_hit</object>
+        <object>objects\obj_spd_uppercut_hit</object>
       </objects>
     </objects>
   </objects>

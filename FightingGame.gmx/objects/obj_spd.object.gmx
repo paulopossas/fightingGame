@@ -27,7 +27,8 @@
             <kind>1</kind>
             <string>jumping = false;
 image_speed = 0.1;
-health = 100;
+current_health = 100
+max_health = 100
 facing = 0 ;// 0 for left, 1 for right
 
 //image_xscale = -abs(image_xscale)
@@ -81,14 +82,15 @@ alarm[1] = attackTimer; // Attack alarm
           <argument>
             <kind>1</kind>
             <string>///Check if health is greater than 0
-if(health &lt;= 0) // If health is all gone
+if(current_health &lt;= 0) // If health is all gone
 {
-    health = 0; // Not neccessary, but sets health points to 0
+    current_health = 0; // Not neccessary, but sets health points to 0
     image_index = 0; // Resets image index to 0
     sprite_index = spd_dmg; // Set enemy animation to Death
     image_speed = .8; // Set enemy animation speed
     eSTATE = 5; // Set enemy state to Death
     efade = 1;
+    instance_destroy();
 }
 </string>
           </argument>
@@ -127,14 +129,14 @@ if(eSTATE == 0 || eSTATE == 1 || eSTATE == 2) // If enemy is not attacking alrea
        else if(eAttack == 1)
        {
        sprite_index = spd_lowkick;
-       instance_create(x,y, obj_spd_lowkick)
+       instance_create(x,y, obj_spd_lowkick_hit)
        }
        else if(eAttack == 2)
        {
        sprite_index = spd_uppercut;
-       instance_create(x,y, obj_spd_uppercut)
+       instance_create(x,y, obj_spd_uppercut_hit)
        }
-       image_speed = .8; // Set enemy animation speed
+       image_speed = 0.3; // Set enemy animation speed
        eSTATE = 3; // Set enemy state to Attack
     }
 }
@@ -309,7 +311,7 @@ if(eSTATE == 0) // Standing
 if(eSTATE == 1) // Walking
 {
     sprite_index = spd_walk; // Set enemy animation to Walk
-    image_speed = 1; // Set enemy animation speed
+    image_speed = 0.3; // Set enemy animation speed
     if(eDir == 0) x += moveSpeed; // Makes enemy move Right accordingly
     else
     if(eDir == 1) eSTATE = 2; // Set enemy state to Walk(other direction)
@@ -318,7 +320,7 @@ if(eSTATE == 1) // Walking
 if(eSTATE == 2) // Walking
 {
     sprite_index = spd_walk; // Set enemy animation to Walk
-    image_speed = 1; // Set enemy animation speed
+    image_speed = 0.3; // Set enemy animation speed
     if(eDir == 0) eSTATE = 1; // Set enemy state to Walk(other direction)
     else
     if(eDir == 1) x -= moveSpeed; // Makes enemy move left accordingly
@@ -339,7 +341,7 @@ if(eSTATE == 4) // Hurt
     if(image_index &gt;= image_number - 1) // If animation is finished
     {
         sprite_index = spd_idle; // Set enemy animation to Stand
-        image_speed = .5; // Set enemy animation speed
+        image_speed = .3; // Set enemy animation speed
         eSTATE = 0; // Set enemy state to Stand
     }
 }
@@ -385,7 +387,7 @@ if(withinAttackDist) // Players punch
     {
         if(instance_exists(obj_str_jab_hit)) // Player punching
         {
-            health -= 15; // Take away hit points
+            current_health -= 15; // Take away hit points
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -395,7 +397,7 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_highkick_hit)) // Player Combo Punching
         {
-            health -= 16; // Take away hit points
+            current_health -= 16; // Take away hit points
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -405,7 +407,7 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_uppercut_hit)) // Player Kicking
         {
-            health -= 15; // Take away hit points
+            current_health -= 15; // Take away hit points
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -415,7 +417,7 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_lowkick_hit)) // Player Combo Kicking
         {
-            health -= 16; // Take away hit points
+            current_health -= 16; // Take away hit points
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
