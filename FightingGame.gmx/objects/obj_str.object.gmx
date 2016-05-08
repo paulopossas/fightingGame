@@ -28,8 +28,8 @@
             <string>jumping = false
 atk = false
 image_speed = 0.5
-current_health = 1000
-max_health = 1000
+current_health = 200
+max_health = 200
 facing = 0 // 0 for left, 1 for right
 STATE = 0;
 </string>
@@ -218,7 +218,8 @@ if(withinAttackDist) // Players punch
     
         if(instance_exists(obj_spd_jab_hit)) // Player punching
         {
-            current_health -= 5; // Take away hit points
+            current_health -= 3; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[0] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt
@@ -229,7 +230,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_spd_lowkick_hit)) // Player Combo Punching
         {
-            current_health -= 6; // Take away hit points
+            current_health -= 4; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[0] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt
@@ -240,6 +242,7 @@ if(withinAttackDist) // Players punch
         if(instance_exists(obj_spd_uppercut_hit)) // Player Kicking
         {
             current_health -= 5; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[0] = 5; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt

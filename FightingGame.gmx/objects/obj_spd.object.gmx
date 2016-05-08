@@ -41,8 +41,8 @@ canAttack = 1; // Allows enemy to attack
 eDir = 0; // Direction enemy is facing
 withinAttackDist = 0; // If the player is close enough to player to attack
 efade = 0; // Used to fade out and destroy enemy when dead
-movementTimer = 60; // Triggers timer for movement
-attackTimer = 5; // Triggers timer for attack
+movementTimer = 45; // Triggers timer for movement
+attackTimer = 25; // Triggers timer for attack
 //randomize(); // Ensures random number
 //image_blend = random(123456789); // Set enemy to random color
 
@@ -387,7 +387,8 @@ if(withinAttackDist) // Players punch
     {
         if(instance_exists(obj_str_jab_hit)) // Player punching
         {
-            current_health -= 15; // Take away hit points
+            current_health -= 5; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -397,7 +398,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_highkick_hit)) // Player Combo Punching
         {
-            current_health -= 16; // Take away hit points
+            current_health -= 6; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -407,7 +409,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_uppercut_hit)) // Player Kicking
         {
-            current_health -= 15; // Take away hit points
+            current_health -= 5; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
@@ -417,7 +420,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_lowkick_hit)) // Player Combo Kicking
         {
-            current_health -= 16; // Take away hit points
+            current_health -= 6; // Take away hit points
+            audio_play_sound(sound1,0,false);
             alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
