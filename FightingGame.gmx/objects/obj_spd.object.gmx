@@ -90,7 +90,7 @@ if(current_health &lt;= 0) // If health is all gone
     image_speed = .8; // Set enemy animation speed
     eSTATE = 5; // Set enemy state to Death
     efade = 1;
-    instance_destroy();
+    //instance_destroy();
 }
 </string>
           </argument>
