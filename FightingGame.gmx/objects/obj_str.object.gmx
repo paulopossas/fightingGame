@@ -30,6 +30,7 @@ atk = false
 image_speed = 0.5
 health = 1000
 facing = 0 // 0 for left, 1 for right
+STATE = 0;
 </string>
           </argument>
         </arguments>
@@ -178,6 +179,16 @@ if(health &lt;= 0) // If health is all gone
 if(obj_str.x &lt; x + abs(sprite_width/2) &amp;&amp; obj_str.x &gt; x - abs(sprite_width/2) &amp;&amp; obj_str.y &lt; y + abs(sprite_height/2) &amp;&amp; obj_str.y &gt; y - abs(sprite_height/2)) withinAttackDist = 1;
 else // If not
 withinAttackDist = 0; // Enemy cannot attack
+if(STATE == 4) // Hurt
+{
+    if(image_index &gt;= image_number - 1) // If animation is finished
+    {
+        sprite_index = Str_idle; // Set enemy animation to Stand
+        image_speed = .5; // Set enemy animation speed
+        STATE = 0; // Set enemy state to Stand
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -211,6 +222,7 @@ if(withinAttackDist) // Players punch
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt
             image_speed = .5; // Set players animation speed
+            STATE = 4;
             
         }
         else
@@ -221,7 +233,7 @@ if(withinAttackDist) // Players punch
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt
             image_speed = .5; // Set players animation speed
-            
+            STATE = 4;
         }
         else
         if(instance_exists(obj_spd_uppercut)) // Player Kicking
@@ -231,7 +243,7 @@ if(withinAttackDist) // Players punch
             image_index = 0; // Set image index to 0
             sprite_index = Str_dmg; // Set players animation to hurt
             image_speed = .5; // Set players animation speed
-            
+            STATE = 4;
         }
         /*else
         if(obj_str.STATE == 13) // Jump Kick
@@ -1117,14 +1129,16 @@ if(withinAttackDist) // Players punch
 
 if room_get_name(room) = "rm_speed"
 {
-        if obj_spd.x &gt; obj_str.x
+    if(object_exists(obj_spd))
+    {
+    if obj_spd.x &gt; obj_str.x
     {
         image_xscale = 1
     }else if obj_spd.x &lt; obj_str.x
     {
         image_xscale = -1
     }
-    
+    }
 }
 </string>
           </argument>

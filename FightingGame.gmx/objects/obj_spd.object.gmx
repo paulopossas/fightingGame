@@ -39,7 +39,7 @@ moveSpeed = 4; // Speed enemy can move by
 canAttack = 1; // Allows enemy to attack
 eDir = 0; // Direction enemy is facing
 withinAttackDist = 0; // If the player is close enough to player to attack
-fade = 0; // Used to fade out and destroy enemy when dead
+efade = 0; // Used to fade out and destroy enemy when dead
 movementTimer = 60; // Triggers timer for movement
 attackTimer = 5; // Triggers timer for attack
 //randomize(); // Ensures random number
@@ -87,8 +87,8 @@ if(health &lt;= 0) // If health is all gone
     image_index = 0; // Resets image index to 0
     sprite_index = spd_dmg; // Set enemy animation to Death
     image_speed = .8; // Set enemy animation speed
-    fade = 1;
     eSTATE = 5; // Set enemy state to Death
+    efade = 1;
 }
 </string>
           </argument>
@@ -352,13 +352,9 @@ if(eSTATE == 5) // Death
     }
 }
 
-if(fade == 1) // If enemy is dead
+if(efade == 1) // If enemy is dead
 {
     image_alpha -= .05; // Gradually decrease enemy alpha
-    if(image_alpha &lt;= 0) // If enemy alpha is fully decreased
-    {
-        instance_destroy(); // Destroy enemy
-    }
 }
 </string>
           </argument>
@@ -389,8 +385,8 @@ if(withinAttackDist) // Players punch
     {
         if(instance_exists(obj_str_jab_hit)) // Player punching
         {
-            health -= 5; // Take away hit points
-            alarm[2] = 5; // Alarm checks if enemy is dead
+            health -= 15; // Take away hit points
+            alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
             image_speed = .1; // Set players animation speed
@@ -399,8 +395,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_highkick_hit)) // Player Combo Punching
         {
-            health -= 6; // Take away hit points
-            alarm[2] = 5; // Alarm checks if enemy is dead
+            health -= 16; // Take away hit points
+            alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
             image_speed = .1; // Set players animation speed
@@ -409,8 +405,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_uppercut_hit)) // Player Kicking
         {
-            health -= 5; // Take away hit points
-            alarm[2] = 5; // Alarm checks if enemy is dead
+            health -= 15; // Take away hit points
+            alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
             image_speed = .1; // Set players animation speed
@@ -419,8 +415,8 @@ if(withinAttackDist) // Players punch
         else
         if(instance_exists(obj_str_lowkick_hit)) // Player Combo Kicking
         {
-            health -= 6; // Take away hit points
-            alarm[2] = 5; // Alarm checks if enemy is dead
+            health -= 16; // Take away hit points
+            alarm[2] = 1; // Alarm checks if enemy is dead
             image_index = 0; // Set image index to 0
             sprite_index = spd_dmg; // Set players animation to hurt
             image_speed = .8; // Set players animation speed
