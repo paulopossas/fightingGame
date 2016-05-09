@@ -4,7 +4,10 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound0</sound>
+    <sound>sound\sound1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="player">
       <sprite>sprites\Str_idle</sprite>
@@ -33,6 +36,14 @@
       <sprite>sprites\spd_uppercut</sprite>
       <sprite>sprites\spd_uppercut_hit</sprite>
     </sprites>
+    <sprites name="buttons">
+      <sprite>sprites\spd_button</sprite>
+      <sprite>sprites\atk_button</sprite>
+      <sprite>sprites\def_button</sprite>
+      <sprite>sprites\hp_button</sprite>
+      <sprite>sprites\start_button</sprite>
+      <sprite>sprites\boss_button</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background1</background>
@@ -42,8 +53,6 @@
     <script>scripts\scr_healthbar.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_hud</object>
-    <object>objects\obj_ground</object>
     <objects name="Characters">
       <objects name="player">
         <object>objects\obj_str</object>
@@ -59,8 +68,22 @@
         <object>objects\obj_spd_uppercut_hit</object>
       </objects>
     </objects>
+    <objects name="interface">
+      <object>objects\button_speed</object>
+      <object>objects\button_def</object>
+      <object>objects\button_hp</object>
+      <object>objects\button_atk</object>
+      <object>objects\button_boss</object>
+      <object>objects\obj_select</object>
+      <object>objects\obj_ground</object>
+      <object>objects\obj_hud</object>
+      <object>objects\obj_main</object>
+      <object>objects\button_start</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_main</room>
+    <room>rooms\rm_select</room>
     <room>rooms\rm_speed</room>
   </rooms>
   <help>

@@ -28,9 +28,8 @@
             <string>jumping = false
 atk = false
 image_speed = 0.5
-current_health = 200
-max_health = 200
-facing = 0 // 0 for left, 1 for right
+current_health = global.curHealth;
+max_health = global.maxHealth;
 STATE = 0;
 </string>
           </argument>
@@ -62,6 +61,8 @@ if(current_health &lt;= 0) // If health is all gone
     sprite_index = Str_dmg; // Set enemy animation to Death
     image_speed = .8; // Set enemy animation speed
     fade = 1;
+    show_message("THIS IS NOT DARK SOULS BUT ... YOU DIED");
+    room_goto(rm_main);
     //eSTATE = 5; // Set enemy state to Death
 }
 </string>
