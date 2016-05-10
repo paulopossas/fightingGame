@@ -76,7 +76,9 @@ draw_text(5, 60, "Attack bonus = "+ string(global.atkBonus));
 draw_text(5, 80, "Speed bonus = "+ string(global.spdBonus));
 draw_text(5, 100, "Defense bonus = "+ string(global.defBonus));
 
-draw_text(5, 120, "Select next fight!");
+draw_text(5, 140, "MOVE WITH THE ARROW KEYS AND ATTACK WITH A, S, Z AND X.");
+
+draw_text(5, 200, "CLICK ON ANY ICON BELOW TO SELECT THE NEXT FIGHT");
 
 
 </string>
