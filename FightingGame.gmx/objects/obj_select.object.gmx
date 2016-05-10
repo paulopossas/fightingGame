@@ -66,10 +66,15 @@ draw_set_halign(fa_left);
 draw_set_colour(c_white);
 draw_text(5, 10, "Fights remaining:" + string(global.fightsRemaining));
 
-draw_text(5, 40, "Boss' bonuses:");
-draw_text(5, 60, "Attack bonus = "+ string(global.bossAtkBonus));
-draw_text(5, 80, "Speed bonus = "+ string(global.bossSpdBonus));
-draw_text(5, 100, "Defense bonus = "+ string(global.bossDefBonus));
+draw_text(200, 40, "Boss' bonuses:");
+draw_text(200, 60, "Attack bonus = "+ string(global.bossAtkBonus));
+draw_text(200, 80, "Speed bonus = "+ string(global.bossSpdBonus));
+draw_text(200, 100, "Defense bonus = "+ string(global.bossDefBonus));
+
+draw_text(5, 40, "Player's bonuses:");
+draw_text(5, 60, "Attack bonus = "+ string(global.atkBonus));
+draw_text(5, 80, "Speed bonus = "+ string(global.spdBonus));
+draw_text(5, 100, "Defense bonus = "+ string(global.defBonus));
 
 draw_text(5, 120, "Select next fight!");
 

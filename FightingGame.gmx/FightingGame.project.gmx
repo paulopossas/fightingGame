@@ -7,8 +7,18 @@
   <sounds name="sound">
     <sound>sound\sound0</sound>
     <sound>sound\sound1</sound>
+    <sound>sound\sound2</sound>
   </sounds>
   <sprites name="sprites">
+    <sprites name="buttons">
+      <sprite>sprites\spd_button</sprite>
+      <sprite>sprites\atk_button</sprite>
+      <sprite>sprites\def_button</sprite>
+      <sprite>sprites\hp_button</sprite>
+      <sprite>sprites\start_button</sprite>
+      <sprite>sprites\boss_button</sprite>
+    </sprites>
+    <sprite>sprites\ground</sprite>
     <sprites name="player">
       <sprite>sprites\Str_idle</sprite>
       <sprite>sprites\Str_dmg</sprite>
@@ -24,7 +34,18 @@
       <sprite>sprites\Str_highkick_hit</sprite>
       <sprite>sprites\Str_hadouken</sprite>
     </sprites>
-    <sprite>sprites\ground</sprite>
+    <sprites name="ATK">
+      <sprite>sprites\atk_idle</sprite>
+      <sprite>sprites\atk_dmg</sprite>
+      <sprite>sprites\atk_walk</sprite>
+      <sprite>sprites\atk_jump</sprite>
+      <sprite>sprites\atk_jab</sprite>
+      <sprite>sprites\atk_jab_hit</sprite>
+      <sprite>sprites\atk_low_kick</sprite>
+      <sprite>sprites\atk_low_kick_hit</sprite>
+      <sprite>sprites\atk_uppercut</sprite>
+      <sprite>sprites\atk_uppercut_hit</sprite>
+    </sprites>
     <sprites name="SPD">
       <sprite>sprites\spd_idle</sprite>
       <sprite>sprites\spd_dmg</sprite>
@@ -36,17 +57,37 @@
       <sprite>sprites\spd_uppercut</sprite>
       <sprite>sprites\spd_uppercut_hit</sprite>
     </sprites>
-    <sprites name="buttons">
-      <sprite>sprites\spd_button</sprite>
-      <sprite>sprites\atk_button</sprite>
-      <sprite>sprites\def_button</sprite>
-      <sprite>sprites\hp_button</sprite>
-      <sprite>sprites\start_button</sprite>
-      <sprite>sprites\boss_button</sprite>
+    <sprites name="DEF">
+      <sprite>sprites\def_idle</sprite>
+      <sprite>sprites\def_dmg</sprite>
+      <sprite>sprites\def_jump</sprite>
+      <sprite>sprites\def_walk</sprite>
+      <sprite>sprites\def_jab</sprite>
+      <sprite>sprites\def_jab_hit</sprite>
+      <sprite>sprites\def_low_kick</sprite>
+      <sprite>sprites\def_low_kick_hit</sprite>
+      <sprite>sprites\def_high_kick</sprite>
+      <sprite>sprites\def_uppercut</sprite>
+      <sprite>sprites\def_uppercut_hit</sprite>
+    </sprites>
+    <sprites name="BOSS">
+      <sprite>sprites\boss_idle</sprite>
+      <sprite>sprites\boss_dmg</sprite>
+      <sprite>sprites\boss_walk</sprite>
+      <sprite>sprites\boss_jump</sprite>
+      <sprite>sprites\boss_jab</sprite>
+      <sprite>sprites\boss_jab_hit</sprite>
+      <sprite>sprites\boss_lowkick</sprite>
+      <sprite>sprites\boss_lowkick_hit</sprite>
+      <sprite>sprites\boss_uppercut</sprite>
+      <sprite>sprites\boss_uppercut_hit</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background1</background>
+    <background>background\background2</background>
+    <background>background\background3</background>
+    <background>background\background4</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -67,6 +108,24 @@
         <object>objects\obj_spd_lowkick_hit</object>
         <object>objects\obj_spd_uppercut_hit</object>
       </objects>
+      <objects name="ATK">
+        <object>objects\obj_atk</object>
+        <object>objects\obj_atk_jab_hit</object>
+        <object>objects\obj_atk_low_kick_hit</object>
+        <object>objects\obj_atk_uppercut_hit</object>
+      </objects>
+      <objects name="DEF">
+        <object>objects\obj_def</object>
+        <object>objects\obj_def_jab_hit</object>
+        <object>objects\obj_def_low_kick_hit</object>
+        <object>objects\obj_def_uppercut_hit</object>
+      </objects>
+      <objects name="BOSS">
+        <object>objects\obj_boss</object>
+        <object>objects\obj_boss_jab_hit</object>
+        <object>objects\obj_boss_lowkick_hit</object>
+        <object>objects\obj_boss_uppercut_hit</object>
+      </objects>
     </objects>
     <objects name="interface">
       <object>objects\button_speed</object>
@@ -79,12 +138,16 @@
       <object>objects\obj_hud</object>
       <object>objects\obj_main</object>
       <object>objects\button_start</object>
+      <object>objects\jukebox</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
     <room>rooms\rm_select</room>
     <room>rooms\rm_speed</room>
+    <room>rooms\rm_attack</room>
+    <room>rooms\rm_defense</room>
+    <room>rooms\rm_boss</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

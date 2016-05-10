@@ -92,6 +92,7 @@ if(current_health &lt;= 0) // If health is all gone
     efade = 1;
     show_message("You won the level");
     global.fightsRemaining -= 1;
+    global.spdBonus += 1;
     room_goto(rm_select);
     //instance_destroy();
 }
@@ -361,110 +362,9 @@ if(efade == 1) // If enemy is dead
 {
     image_alpha -= .05; // Gradually decrease enemy alpha
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_str">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Collision with the Player
-if(withinAttackDist) // Players punch
-{
-    if(eSTATE &lt; 3)
-    {
-        if(instance_exists(obj_str_jab_hit)) // Player punching
-        {
-            current_health -= 5; // Take away hit points
-            audio_play_sound(sound1,0,false);
-            alarm[2] = 1; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .1; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        else
-        if(instance_exists(obj_str_highkick_hit)) // Player Combo Punching
-        {
-            current_health -= 6; // Take away hit points
-            audio_play_sound(sound1,0,false);
-            alarm[2] = 1; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .1; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        else
-        if(instance_exists(obj_str_uppercut_hit)) // Player Kicking
-        {
-            current_health -= 5; // Take away hit points
-            audio_play_sound(sound1,0,false);
-            alarm[2] = 1; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .1; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        else
-        if(instance_exists(obj_str_lowkick_hit)) // Player Combo Kicking
-        {
-            current_health -= 6; // Take away hit points
-            audio_play_sound(sound1,0,false);
-            alarm[2] = 1; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        /*else
-        if(obj_str.STATE == 13) // Jump Kick
-        {
-            health -= 15; // Take away hit points
-            alarm[2] = 5; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        else
-        if(obj_str.STATE == 14) // Jump Kicking Right
-        {
-            health -= 20; // Take away hit points
-            x += 50;
-            alarm[2] = 5; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }
-        else
-        if(obj_str.STATE == 15) // Jump Kicking Left
-        {
-            health -= 20; // Take away hit points
-            x -= 50;
-            alarm[2] = 5; // Alarm checks if enemy is dead
-            image_index = 0; // Set image index to 0
-            sprite_index = spd_dmg; // Set players animation to hurt
-            image_speed = .8; // Set players animation speed
-            eSTATE = 4; // Set players state to Hurt
-        }*/
-    }
-}
+
+x = clamp(x, 55, 710);
+y = clamp(y, 0, 600);
 </string>
           </argument>
         </arguments>
@@ -598,6 +498,110 @@ if(withinAttackDist) // Players punch
         <isnot>0</isnot>
       </action>
     </event>
+    <event eventtype="4" ename="obj_str">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision with the Player
+if(withinAttackDist) // Players punch
+{
+    if(eSTATE &lt; 3)
+    {
+        if(instance_exists(obj_str_jab_hit)) // Player punching
+        {
+            current_health -= 5 + 1*global.atkBonus; // Take away hit points
+            audio_play_sound(sound1,0,false);
+            alarm[2] = 1; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .1; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(instance_exists(obj_str_highkick_hit)) // Player Combo Punching
+        {
+            current_health -= 6 + 1*global.atkBonus; // Take away hit points
+            audio_play_sound(sound1,0,false);
+            alarm[2] = 1; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .1; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(instance_exists(obj_str_uppercut_hit)) // Player Kicking
+        {
+            current_health -= 5 + 1*global.atkBonus; // Take away hit points
+            audio_play_sound(sound1,0,false);
+            alarm[2] = 1; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .1; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(instance_exists(obj_str_lowkick_hit)) // Player Combo Kicking
+        {
+            current_health -= 6 + 1*global.atkBonus; // Take away hit points
+            audio_play_sound(sound1,0,false);
+            alarm[2] = 1; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        /*else
+        if(obj_str.STATE == 13) // Jump Kick
+        {
+            health -= 15; // Take away hit points
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(obj_str.STATE == 14) // Jump Kicking Right
+        {
+            health -= 20; // Take away hit points
+            x += 50;
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }
+        else
+        if(obj_str.STATE == 15) // Jump Kicking Left
+        {
+            health -= 20; // Take away hit points
+            x -= 50;
+            alarm[2] = 5; // Alarm checks if enemy is dead
+            image_index = 0; // Set image index to 0
+            sprite_index = spd_dmg; // Set players animation to hurt
+            image_speed = .8; // Set players animation speed
+            eSTATE = 4; // Set players state to Hurt
+        }*/
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="7">
       <action>
         <libid>1</libid>
@@ -624,6 +628,32 @@ if(withinAttackDist) // Players punch
 }
     
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>101</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_move</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>000010000</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>

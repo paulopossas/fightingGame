@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(rm_speed);
+            <string>global.curHealth += 150;
+show_message("Healed by 150 hp");
+global.fightsRemaining -= 1;
+room_goto(rm_select);
 </string>
           </argument>
         </arguments>
